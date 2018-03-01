@@ -1,0 +1,4 @@
+CREATE TABLE `user` (
+  `user_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+  `username` varchar(64) NOT NULL DEFAULT '' COMMENT '用户名'
+) DEFAULT CHARSET=utf8 COMMENT='用户表';
