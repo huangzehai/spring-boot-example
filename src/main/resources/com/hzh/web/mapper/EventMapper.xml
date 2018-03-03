@@ -14,8 +14,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hzh.web.mapper.UserMapper">
-    <insert id="addUser">
-        INSERT INTO user(username) values(#{username})
+<mapper namespace="com.hzh.web.mapper.EventMapper">
+    <insert id="addEvent">
+        INSERT INTO event(event_title) values(#{eventTitle})
     </insert>
 </mapper>

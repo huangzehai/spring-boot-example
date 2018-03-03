@@ -22,7 +22,7 @@ public class ScheduledTasks {
 
     private static final ScheduledExecutorService schedulePool = Executors.newScheduledThreadPool(3);
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 60000)
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
