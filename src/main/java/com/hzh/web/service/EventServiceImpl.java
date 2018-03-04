@@ -1,5 +1,6 @@
 package com.hzh.web.service;
 
+import com.hzh.web.Exception.NetworkException;
 import com.hzh.web.mapper.EventMapper;
 import com.hzh.web.model.Event;
 import com.hzh.web.model.User;
@@ -16,10 +17,13 @@ public class EventServiceImpl implements EventService {
     private UserService userService;
 
     @Override
-    @Transactional
-    public int addEvent(Event event, User user) {
+    @Transactional(rollbackFor = NetworkException.class)
+    public int addEvent(Event event, User user) throws NetworkException {
         eventMapper.addEvent(event);
         userService.addUser(user);
+        if (1 == 1) {
+            throw new NetworkException();
+        }
         return 0;
     }
 }

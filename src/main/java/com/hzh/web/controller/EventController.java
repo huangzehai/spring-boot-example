@@ -1,5 +1,6 @@
 package com.hzh.web.controller;
 
+import com.hzh.web.Exception.NetworkException;
 import com.hzh.web.model.Event;
 import com.hzh.web.model.User;
 import com.hzh.web.service.EventService;
@@ -17,7 +18,7 @@ public class EventController {
 
     @RequestMapping("add")
     @ResponseBody
-    String addEvent(String username, String eventTitle) {
+    String addEvent(String username, String eventTitle) throws NetworkException {
         if (StringUtils.isBlank(username)) {
             return "username should not be blank";
         }
