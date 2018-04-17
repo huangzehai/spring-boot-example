@@ -8,3 +8,6 @@ spring:
     password: my2018
     testWhileIdle: true
     validationQuery: SELECT 1
+
+hello.foo:
+- c

@@ -1,6 +1,5 @@
 package com.hzh.web.task;
 
-import com.hzh.web.crawler.WanzhoumoCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class ScheduledTasks {
@@ -29,6 +27,6 @@ public class ScheduledTasks {
 
     @PostConstruct
     public void crawl() {
-        schedulePool.scheduleWithFixedDelay(new WanzhoumoCrawler(), 0, 2, TimeUnit.HOURS);
+//        schedulePool.scheduleWithFixedDelay(new WanzhoumoCrawler(), 0, 2, TimeUnit.HOURS);
     }
 }
