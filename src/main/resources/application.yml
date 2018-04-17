@@ -11,3 +11,9 @@ spring:
 
 hello.foo:
 - c
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
