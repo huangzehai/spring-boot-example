@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @ConfigurationProperties(prefix = "hello")
-@Configuration
 public class HelloProperties {
     public List<String> getFoo() {
         return foo;
