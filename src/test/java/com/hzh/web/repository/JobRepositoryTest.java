@@ -2,6 +2,8 @@ package com.hzh.web.repository;
 
 import com.hzh.web.entity.Job;
 import com.hzh.web.entity.SqlJob;
+import com.hzh.web.query.JobQuery;
+import com.hzh.web.query.JobSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,19 +28,46 @@ public class JobRepositoryTest {
     @Test
     @Transactional
     public void testOneToOneMapping() {
-        Job job = new Job();
-        job.setJobName("getMovies");
-        SqlJob sqlJob = new SqlJob();
-        sqlJob.setSql("SELECT * FROM ml_movies;");
-        job.setSqlJob(sqlJob);
-        Job save = jobRepository.save(job);
-
-        Optional<Job> jobOptional = jobRepository.findById(save.getId());
+        Job savedMovieJob = jobRepository.save(createMoviesJob());
+        Optional<Job> jobOptional = jobRepository.findById(savedMovieJob.getId());
         Assert.assertTrue(jobOptional.isPresent());
         Job readJob = jobOptional.get();
         Assert.assertEquals("getMovies", readJob.getJobName());
         Assert.assertNotNull(readJob.getSqlJob());
         Assert.assertEquals("SELECT * FROM ml_movies;", readJob.getSqlJob().getSql());
+    }
+
+    @Test
+    public void testSpecification() {
+        jobRepository.save(createMoviesJob());
+        jobRepository.save(createDeviceCountJob());
+        JobQuery jobQueryWithoutJobName = new JobQuery();
+        List<Job> jobs = jobRepository.findAll(new JobSpecification(jobQueryWithoutJobName));
+        Assert.assertNotNull(jobs);
+        Assert.assertEquals(2, jobs.size());
+
+        JobQuery jobQueryWithJobName = new JobQuery();
+        jobQueryWithJobName.setJobName("getMovies");
+        jobs = jobRepository.findAll(new JobSpecification(jobQueryWithJobName));
+        Assert.assertEquals(1, jobs.size());
+    }
+
+    private Job createMoviesJob() {
+        Job job = new Job();
+        job.setJobName("getMovies");
+        SqlJob sqlJob = new SqlJob();
+        sqlJob.setSql("SELECT * FROM ml_movies;");
+        job.setSqlJob(sqlJob);
+        return job;
+    }
+
+    private Job createDeviceCountJob() {
+        Job job = new Job();
+        job.setJobName("getDeviceCount");
+        SqlJob sqlJob = new SqlJob();
+        sqlJob.setSql("SELECT count(*) FROM devices;");
+        job.setSqlJob(sqlJob);
+        return job;
     }
 
 }
