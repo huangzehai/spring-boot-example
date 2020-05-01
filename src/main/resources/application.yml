@@ -13,6 +13,10 @@ spring:
   h2:
     console:
       enabled: true
+#  jpa:
+#    properties:
+#      hibernate:
+#        enable_lazy_load_no_trans: true
 
 hello.foo:
   - c
@@ -22,3 +26,4 @@ management:
     web:
       exposure:
         include: "*"
+
